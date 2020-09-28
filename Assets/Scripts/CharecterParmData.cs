@@ -5,15 +5,21 @@ using UnityEngine;
 [CreateAssetMenu]
 public class CharecterParmData  : ScriptableObject
 {
-    public float hp;
+    [Min(1.0f)] public float hp;
 
-    public float defence;
+    [Min(0.0f)] public float defence;
 
-    public float attack;
+    [Min(0.0f)] public float attack;
 
-    public float speed;
+    [Min(0.0f)] public float speed;
 
-    public float attacRange;
+    [Min(0.0f)] public float attacRange;
 
-    public float retreatRadius;
+    [Min(0.0f)] public float retreatRadius;
+
+    [Min(0.0f)] public float _parameterMultiplier;
+
+    [Range(0, 1)] public float _critChanse;
+    
+    [Min(1.0f)]public float _critMultiplier;
 }

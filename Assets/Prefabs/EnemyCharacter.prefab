@@ -1761,6 +1761,7 @@ GameObject:
   - component: {fileID: 8203473410326952326}
   - component: {fileID: 8203473410326952327}
   - component: {fileID: 8203473410326952344}
+  - component: {fileID: 114891711194096532}
   m_Layer: 0
   m_Name: EnemyCharacter
   m_TagString: Enemy
@@ -1882,6 +1883,8 @@ MonoBehaviour:
   defence: 40
   attack: 10
   speed: 3.5
+  attacRange: 0
+  retreatRadius: 0
 --- !u!114 &8203473410326952344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1894,3 +1897,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb56444672044de1a63313907a67a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114891711194096532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8203473410326952322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0e7fb33793c4e00a4280743fb0ceb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: bfbac3d66effc4acab809acb8af0ff2e, type: 2}
+  PlayerWinUniEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8203473410326952323}
+        m_MethodName: GameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  PlayerDeathUniEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8203473410326952323}
+        m_MethodName: GameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

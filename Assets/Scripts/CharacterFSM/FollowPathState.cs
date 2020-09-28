@@ -11,7 +11,6 @@ public class FollowPathState : FSMState
  
     public override void Reason(Transform player, Transform npc)
     {
-        // If the Player passes less than 15 meters away in front of the NPC
         if (Vector3.Distance(player.position, npc.position) <= _retreatRadius)
         {
             player.GetComponent<characterControl>().SetTransition(Transition.SawEnemy);

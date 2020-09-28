@@ -13,20 +13,12 @@ public class SpawnEnemys : MonoBehaviour
     private bool isSpawning = true;
     
 
-    public void StopSpawn()
+    public void GameOver()
     {
         isSpawning = false;
-        print("stopSpawn");
     }
 
-    public void loseTest()
-    {
-        print("loseTest");
-    }
-    public void winTest()
-    {
-        print("winTest");
-    }
+    
     void Spawn()
     {
         int rand = Random.Range(0, spawnPoints.Length);

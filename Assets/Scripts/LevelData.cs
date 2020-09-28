@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class LevelData : MonoBehaviour
 {
-   static public int generation = 1;
+   static public int generation = 0;
 }

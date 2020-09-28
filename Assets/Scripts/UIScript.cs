@@ -20,7 +20,7 @@ public class UIScript : MonoBehaviour
     public void onPlayerLose()
     {
         _winLoseText.text = _loseString;
-        LevelData.generation = 1;
+        LevelData.generation = 0;
         _winLoseWindow.SetActive(true);
     }
 

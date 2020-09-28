@@ -16,3 +16,8 @@ MonoBehaviour:
   defence: 40
   attack: 10
   speed: 3.5
+  attacRange: 0
+  retreatRadius: 0
+  _parameterMultiplier: 0.1
+  _critChanse: 0.18
+  _critMultiplier: 2

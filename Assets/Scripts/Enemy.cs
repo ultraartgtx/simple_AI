@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent (typeof (NavMeshAgent))] 
 [RequireComponent (typeof (CharacterTakeDamege))] 
 [RequireComponent (typeof (CharacterParameters))] 
+[RequireComponent(typeof(CharacterCalculateDamage))]
 public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
+    private bool isGameOver = false;
     private SpawnEnemys _spawnEnemys;
     private NavMeshAgent _agent;
     private GameObject _player;
@@ -18,7 +17,15 @@ public class Enemy : MonoBehaviour
     private AnimationEvent _AnimationEvent;
     private CharacterTakeDamege _characterTakeDamegeSctipt;
     private CharacterParameters _enemyParms;
-    
+    private CharacterCalculateDamage _characterCalculateDamage;
+
+
+    public void GameOver()
+    {
+        isGameOver = true;
+        _agent.Stop();
+    }
+
     private void OnDestroy()
     {
         _AnimationEvent.OnHit -= GiveDamage;
@@ -33,12 +40,13 @@ public class Enemy : MonoBehaviour
 
     void GiveDamage()
     {
-        _player.GetComponent<CharacterTakeDamege>().TakeDamege(_enemyParms.attack);
+        _player.GetComponent<CharacterTakeDamege>().TakeDamege(_characterCalculateDamage.calculateDamage(_enemyParms.attack));
         print("GiveDamage.enemy");
     }
 
     void Start()
     {
+        _characterCalculateDamage = GetComponent<CharacterCalculateDamage>();
         _AnimationEvent = GetComponent<AnimationEvent>();
         _enemyParms = GetComponent<CharacterParameters>();
         _AnimationEvent.OnHit += GiveDamage;
@@ -54,11 +62,12 @@ public class Enemy : MonoBehaviour
     
     void FixedUpdate()
     {
-        
-        _agent.SetDestination(_target.position);
-        if (Vector3.Distance(_target.position , transform.position) < 3) {
-            _animator.SetTrigger("Attack1Trigger");
+        if (!isGameOver)
+        {
+            _agent.SetDestination(_target.position);
+            if (Vector3.Distance(_target.position , transform.position) <= _enemyParms.attacRange) {
+                _animator.SetTrigger("Attack1Trigger");
+            }
         }
-
     }
 }
