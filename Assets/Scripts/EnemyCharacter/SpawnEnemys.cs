@@ -5,8 +5,8 @@ using UnityEngine;
 public class SpawnEnemys : MonoBehaviour
 {
 
-
-    public float timeToSpawnEnemy;
+    public SpawnParmsData spawnParmsData;
+    private float timeToSpawnEnemy;
     private Transform[] spawnPoints;
     
     //the list used by the player to check all enemies
@@ -29,7 +29,7 @@ public class SpawnEnemys : MonoBehaviour
     
     void Start()
     {
-        
+        timeToSpawnEnemy = spawnParmsData.timeToSpawnEnemy;
         spawnPoints=transform.GetComponentsInChildren<Transform>();
         Spawn();
     }

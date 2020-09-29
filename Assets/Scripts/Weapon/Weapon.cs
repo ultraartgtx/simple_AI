@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -7,7 +8,8 @@ public class Weapon : MonoBehaviour
     public GameObject _explosion;
 
     [HideInInspector]public bool isReady = true;
-    public float rocketSpeed = 10f;
+    public RocketWeaponeParms rocketWeaponeParms;
+    private float rocketSpeed ;
 
     IEnumerator shoot(Transform rocketTransform, Transform enemyTransform,float damage )
     {
@@ -35,7 +37,11 @@ public class Weapon : MonoBehaviour
         
         isReady = true;
     }
-    
+
+    private void Start()
+    {
+        rocketSpeed = rocketWeaponeParms.rocketSpeed;
+    }
 
     public void MakeShoot(Transform enemy,float damage)
     {

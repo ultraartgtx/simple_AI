@@ -9,15 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5033313a890a1462a9e43784dd7b5d90, type: 3}
-  m_Name: PlayerCharacterParms
+  m_Script: {fileID: 11500000, guid: 7ae5859d4f9fd4eb0b5aa47bc2047f58, type: 3}
+  m_Name: SpawnParms
   m_EditorClassIdentifier: 
-  hp: 100
-  defence: 40
-  attack: 80
-  speed: 3
-  attacRange: 70
-  retreatRadius: 10
-  _parameterMultiplier: 0
-  _critChanse: 0.2
-  _critMultiplier: 2
+  timeToSpawnEnemy: 10
