@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a29c8111dbaa4e18b060871fae124d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 0}
+  gameEvent: {fileID: 11400000, guid: 6fc58070df70f48a7b6f6d3ecffc65df, type: 2}
 --- !u!1 &624240576
 GameObject:
   m_ObjectHideFlags: 0
@@ -2588,7 +2588,7 @@ MonoBehaviour:
   defence: 54.08
   attack: 50
   speed: 3
-  attacRange: 0
+  attackRange: 0
   retreatRadius: 0
   critChanse: 0
   critMultiplier: 0

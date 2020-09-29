@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Analytics;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CharacterTakeDamege))]
@@ -21,6 +22,7 @@ public class PlayerCharacterControl : MonoBehaviour
     //parms
     private float playerAttackRange;
     private float rangeToCheckRaycast = 200f;
+    private bool isGameOver = false;
     
     //FSM
     public Transform eyesTransform;
@@ -32,14 +34,19 @@ public class PlayerCharacterControl : MonoBehaviour
     public Weapon weapon;
     //Spawn
     private SpawnEnemys spawnEnemys;
-   
-    
-    
-  
+
+
+
+    void  GameOver()
+    {
+        isGameOver = true;
+        playerAgent.Stop();
+    }
 
     void characterDeath()
     {
         PlayerEventListener.PlayerDeath();
+        GameOver();
     }
 
     private void OnDestroy()
@@ -101,30 +108,33 @@ public class PlayerCharacterControl : MonoBehaviour
 
     public void FixedUpdate()
     {
-        
-        if (spawnEnemys.enemys.Count > 0)
+        if (!isGameOver)
         {
-            Transform target= spawnEnemys.enemys[0];
-            float distance = Vector3.Distance(playerTransform.position, spawnEnemys.enemys[0].position);
-            
-            for (int count = 1; count < spawnEnemys.enemys.Count; count++)
+            if (spawnEnemys.enemys.Count > 0)
             {
-                    bool isVisible = IsVisible(spawnEnemys.enemys[count]);
-                if (Vector3.Distance(playerTransform.position, spawnEnemys.enemys[count].position) < distance && isVisible)
+                Transform target= spawnEnemys.enemys[0];
+                float distance = Vector3.Distance(playerTransform.position, spawnEnemys.enemys[0].position);
+            
+                for (int count = 1; count < spawnEnemys.enemys.Count; count++)
                 {
-                    target = spawnEnemys.enemys[count];
-                    distance = Vector3.Distance(playerTransform.position, spawnEnemys.enemys[count].position);
+                    bool isVisible = IsVisible(spawnEnemys.enemys[count]);
+                    if (Vector3.Distance(playerTransform.position, spawnEnemys.enemys[count].position) < distance && isVisible)
+                    {
+                        target = spawnEnemys.enemys[count];
+                        distance = Vector3.Distance(playerTransform.position, spawnEnemys.enemys[count].position);
+                    }
                 }
-            }
             
-            if (weapon.isReady&&IsVisible(target)&&distance<=playerAttackRange)
-            {
-                weapon.MakeShoot(target,playerCharacterCalculateDamage.calculateDamage(playerCharacterParameters.attack));
-            }
-            fsm.CurrentState.Reason(playerTransform, target); 
+                if (weapon.isReady&&IsVisible(target)&&distance<=playerAttackRange)
+                {
+                    weapon.MakeShoot(target,playerCharacterCalculateDamage.calculateDamage(playerCharacterParameters.attack));
+                }
+                fsm.CurrentState.Reason(playerTransform, target); 
             
+            }
+            fsm.CurrentState.Act(playerAgent, finishTransform.position);
         }
-        fsm.CurrentState.Act(playerAgent, finishTransform.position);
+
     }
  
 	// The NPC has two states: FollowPath and ChasePlayer
