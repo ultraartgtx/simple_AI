@@ -20,4 +20,4 @@ MonoBehaviour:
   retreatRadius: 10
   _parameterMultiplier: 0
   _critChanse: 0.1
-  _critMultiplier: 1.5
+  _critMultiplier: 2

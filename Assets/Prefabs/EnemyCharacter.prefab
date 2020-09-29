@@ -1761,6 +1761,7 @@ GameObject:
   - component: {fileID: 8203473410326952326}
   - component: {fileID: 8203473410326952327}
   - component: {fileID: 8203473410326952344}
+  - component: {fileID: 4246170398446608422}
   - component: {fileID: 114891711194096532}
   m_Layer: 0
   m_Name: EnemyCharacter
@@ -1885,6 +1886,8 @@ MonoBehaviour:
   speed: 3.5
   attacRange: 0
   retreatRadius: 0
+  critChanse: 0
+  critMultiplier: 0
 --- !u!114 &8203473410326952344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1895,6 +1898,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cb56444672044de1a63313907a67a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4246170398446608422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8203473410326952322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38681acfd7d0843318a743ad3992c8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114891711194096532

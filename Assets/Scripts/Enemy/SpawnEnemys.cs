@@ -8,7 +8,7 @@ public class SpawnEnemys : MonoBehaviour
 
     public float timeToSpawnEnemy;
     private Transform[] spawnPoints;
-    public List<Transform> enemys;
+    [HideInInspector]public List<Transform> enemys;
     public GameObject enemyPrefab;
     private bool isSpawning = true;
     
@@ -37,7 +37,7 @@ public class SpawnEnemys : MonoBehaviour
     {
         if(!IsInvoking("Spawn")&&isSpawning)
         {
-            Invoke("Spawn", timeToSpawnEnemy); //выполняем sec каждые 5 секунд
+            Invoke("Spawn", timeToSpawnEnemy); 
         } 
     }
 }

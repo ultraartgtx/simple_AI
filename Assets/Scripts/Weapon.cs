@@ -5,8 +5,6 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public GameObject _rocket;
-    
-    
     public GameObject _explosion;
 
     public bool isReady = true;
@@ -34,7 +32,7 @@ public class Weapon : MonoBehaviour
         
         Instantiate(_explosion, enemyTransform.position, Quaternion.identity);
         Destroy(rocketTransform.gameObject);
-        enemyTransform.gameObject.GetComponent<CharacterTakeDamege>().TakeDamege(damage);
+        enemyTransform.GetComponent<CharacterTakeDamege>().TakeDamege(damage);
         
         isReady = true;
     }
