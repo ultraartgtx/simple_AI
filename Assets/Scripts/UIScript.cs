@@ -9,7 +9,6 @@ public class UIScript : MonoBehaviour
     public Text _winLoseText;
     private const string _loseString="You Lose";
     private const string _winString="You Win";
-    
     public GameObject _winLoseWindow;
     
     public void RestartCurrentScene()

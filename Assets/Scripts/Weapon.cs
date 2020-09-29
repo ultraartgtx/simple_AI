@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -7,7 +6,7 @@ public class Weapon : MonoBehaviour
     public GameObject _rocket;
     public GameObject _explosion;
 
-    public bool isReady = true;
+    [HideInInspector]public bool isReady = true;
     public float rocketSpeed = 10f;
 
     IEnumerator shoot(Transform rocketTransform, Transform enemyTransform,float damage )
@@ -36,12 +35,7 @@ public class Weapon : MonoBehaviour
         
         isReady = true;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
 
     public void MakeShoot(Transform enemy,float damage)
     {
@@ -51,7 +45,6 @@ public class Weapon : MonoBehaviour
             StartCoroutine(shoot(rocket, enemy,damage));
         }
     }
-
-    // Update is called once per frame
+    
     
 }

@@ -827,12 +827,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610069762}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.8803062, y: 0.47, z: 46.39}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.7880306, y: 0.047000002, z: 4.639}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 1948315857}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &610069767
 MonoBehaviour:
@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a29c8111dbaa4e18b060871fae124d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: bfbac3d66effc4acab809acb8af0ff2e, type: 2}
+  _gameEvent: {fileID: 0}
 --- !u!1 &624240576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,7 +1082,7 @@ Transform:
   - {fileID: 1525181763}
   - {fileID: 1658515006}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1230338264
 MonoBehaviour:
@@ -1096,7 +1096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0e7fb33793c4e00a4280743fb0ceb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: bfbac3d66effc4acab809acb8af0ff2e, type: 2}
+  Event: {fileID: 11400000, guid: 6fc58070df70f48a7b6f6d3ecffc65df, type: 2}
   PlayerWinUniEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1298,7 +1298,7 @@ RectTransform:
   m_Children:
   - {fileID: 1481817335}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1331,7 +1331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0e7fb33793c4e00a4280743fb0ceb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: bfbac3d66effc4acab809acb8af0ff2e, type: 2}
+  Event: {fileID: 11400000, guid: 6fc58070df70f48a7b6f6d3ecffc65df, type: 2}
   PlayerWinUniEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1424,7 +1424,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1481817334
 GameObject:
@@ -1761,6 +1761,7 @@ Transform:
   - {fileID: 4226683888311044}
   - {fileID: 4226685727402391}
   - {fileID: 202141670}
+  - {fileID: 610069766}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2605,7 +2606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eyes: {fileID: 4053434882359523}
   _Weapon: {fileID: 1276817048}
-  _GameEvent: {fileID: 11400000, guid: bfbac3d66effc4acab809acb8af0ff2e, type: 2}
+  _GameEvent: {fileID: 11400000, guid: 6fc58070df70f48a7b6f6d3ecffc65df, type: 2}
 --- !u!114 &1997954227858197
 MonoBehaviour:
   m_ObjectHideFlags: 0
