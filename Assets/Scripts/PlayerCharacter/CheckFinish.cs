@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class CheckFinish : MonoBehaviour
 {
-    public PlayerEventScriptObj _gameEvent;
+    public PlayerEventScriptObj  gameEvent;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-           _gameEvent.PlayerWin();
+            gameEvent.PlayerWin();
         }
     }
     

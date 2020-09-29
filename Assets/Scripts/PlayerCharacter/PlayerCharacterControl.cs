@@ -11,26 +11,27 @@ using UnityEngine.AI;
 public class PlayerCharacterControl : MonoBehaviour
 {
     //events
-    public PlayerEventScriptObj _GameEvent;
-    private CharacterTakeDamege _characterTakeDamege;
+    public PlayerEventScriptObj PlayerEventListener;
+    private CharacterTakeDamege playerCharacterTakeDamege;
+    
     //character parm scripts
-    private CharacterParameters _characterParameters;
-    private CharacterCalculateDamage _characterCalculateDamage;
+    private CharacterParameters playerCharacterParameters;
+    private CharacterCalculateDamage playerCharacterCalculateDamage;
     
     //parms
-    private float _attacRange;
+    private float playerAttackRange;
     private float rangeToCheckRaycast = 200f;
     
     //FSM
-    public Transform _eyes;
+    public Transform eyesTransform;
     private FSMSystem fsm;
-    private NavMeshAgent _agent;
-    private Transform _finish;
-    private Transform _playerTransform;
+    private NavMeshAgent playerAgent;
+    private Transform finishTransform;
+    private Transform playerTransform;
     //Weapon
-    public Weapon _Weapon;
+    public Weapon weapon;
     //Spawn
-    private SpawnEnemys _spawnEnemys;
+    private SpawnEnemys spawnEnemys;
    
     
     
@@ -38,7 +39,7 @@ public class PlayerCharacterControl : MonoBehaviour
 
     void characterDeath()
     {
-        _GameEvent.PlayerDeath();
+        PlayerEventListener.PlayerDeath();
     }
 
     private void OnDestroy()
@@ -48,28 +49,28 @@ public class PlayerCharacterControl : MonoBehaviour
 
     void setComponents()
     {
-        _playerTransform = this.transform;
-        _characterTakeDamege = GetComponent<CharacterTakeDamege>();
-        _characterParameters = GetComponent<CharacterParameters>();
-        _characterCalculateDamage = GetComponent<CharacterCalculateDamage>(); 
-        _agent = GetComponent<NavMeshAgent>();
-        _spawnEnemys = FindObjectOfType<SpawnEnemys>();
-        _finish=GameObject.FindGameObjectWithTag("Finish").transform;
+        playerTransform = this.transform;
+        playerCharacterTakeDamege = GetComponent<CharacterTakeDamege>();
+        playerCharacterParameters = GetComponent<CharacterParameters>();
+        playerCharacterCalculateDamage = GetComponent<CharacterCalculateDamage>(); 
+        playerAgent = GetComponent<NavMeshAgent>();
+        spawnEnemys = FindObjectOfType<SpawnEnemys>();
+        finishTransform=GameObject.FindGameObjectWithTag("Finish").transform;
     }
 
     void registerReceivers()
     {
-        _characterTakeDamege.OnCharacterDeath += characterDeath; 
+        playerCharacterTakeDamege.OnCharacterDeath += characterDeath; 
     }
     void unregisterReceivers()
     {
-        _characterTakeDamege.OnCharacterDeath -= characterDeath; 
+        playerCharacterTakeDamege.OnCharacterDeath -= characterDeath; 
     }
 
     void setParms()
     {
-        _agent.speed = _characterParameters.speed;
-        _attacRange = _characterParameters.attacRange;
+        playerAgent.speed = playerCharacterParameters.speed;
+        playerAttackRange = playerCharacterParameters.attackRange;
         this.gameObject.tag = "Player";
     }
 
@@ -84,9 +85,9 @@ public class PlayerCharacterControl : MonoBehaviour
     bool IsVisible(Transform target)
     {
             RaycastHit hit;
-            Vector3 direction = (( target.position+Vector3.up)-(_eyes.position+Vector3.up)).normalized;
+            Vector3 direction = (( target.position+Vector3.up)-(eyesTransform.position+Vector3.up)).normalized;
             
-            if (Physics.Raycast(_eyes.position+Vector3.up, direction, out hit, rangeToCheckRaycast))
+            if (Physics.Raycast(eyesTransform.position+Vector3.up, direction, out hit, rangeToCheckRaycast))
             {
 
                 if (hit.collider.transform == target)
@@ -101,29 +102,29 @@ public class PlayerCharacterControl : MonoBehaviour
     public void FixedUpdate()
     {
         
-        if (_spawnEnemys.enemys.Count > 0)
+        if (spawnEnemys.enemys.Count > 0)
         {
-            Transform target= _spawnEnemys.enemys[0];
-            float distance = Vector3.Distance(_playerTransform.position, _spawnEnemys.enemys[0].position);
+            Transform target= spawnEnemys.enemys[0];
+            float distance = Vector3.Distance(playerTransform.position, spawnEnemys.enemys[0].position);
             
-            for (int count = 1; count < _spawnEnemys.enemys.Count; count++)
+            for (int count = 1; count < spawnEnemys.enemys.Count; count++)
             {
-                    bool isVisible = IsVisible(_spawnEnemys.enemys[count]);
-                if (Vector3.Distance(_playerTransform.position, _spawnEnemys.enemys[count].position) < distance && isVisible)
+                    bool isVisible = IsVisible(spawnEnemys.enemys[count]);
+                if (Vector3.Distance(playerTransform.position, spawnEnemys.enemys[count].position) < distance && isVisible)
                 {
-                    target = _spawnEnemys.enemys[count];
-                    distance = Vector3.Distance(_playerTransform.position, _spawnEnemys.enemys[count].position);
+                    target = spawnEnemys.enemys[count];
+                    distance = Vector3.Distance(playerTransform.position, spawnEnemys.enemys[count].position);
                 }
             }
             
-            if (_Weapon.isReady&&IsVisible(target)&&distance<=_attacRange)
+            if (weapon.isReady&&IsVisible(target)&&distance<=playerAttackRange)
             {
-                _Weapon.MakeShoot(target,_characterCalculateDamage.calculateDamage(_characterParameters.attack));
+                weapon.MakeShoot(target,playerCharacterCalculateDamage.calculateDamage(playerCharacterParameters.attack));
             }
-            fsm.CurrentState.Reason(_playerTransform, target); 
+            fsm.CurrentState.Reason(playerTransform, target); 
             
         }
-        fsm.CurrentState.Act(_agent, _finish.position);
+        fsm.CurrentState.Act(playerAgent, finishTransform.position);
     }
  
 	// The NPC has two states: FollowPath and ChasePlayer
@@ -133,10 +134,10 @@ public class PlayerCharacterControl : MonoBehaviour
     public void SetTransition(Transition t) { fsm.PerformTransition(t); }
     private void MakeFSM()
     {
-        FollowPathState follow = new FollowPathState(_characterParameters.retreatRadius);
+        FollowPathState follow = new FollowPathState(playerCharacterParameters.retreatRadius);
         follow.AddTransition(Transition.SawEnemy, StateID.ChasingEnemy);
  
-        ChasePlayerState chase = new ChasePlayerState(_characterParameters.retreatRadius);
+        ChasePlayerState chase = new ChasePlayerState(playerCharacterParameters.retreatRadius);
         chase.AddTransition(Transition.LostEnemy, StateID.FollowingPath);
  
         fsm = new FSMSystem();

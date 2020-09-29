@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a29c8111dbaa4e18b060871fae124d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 0}
+  gameEvent: {fileID: 0}
 --- !u!1 &624240576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,8 +1317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8fdb1a3957549168e7b99b0576bb5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _winLoseText: {fileID: 2029169314}
-  _winLoseWindow: {fileID: 1481817334}
+  winLoseText: {fileID: 2029169314}
+  winLoseWindow: {fileID: 1481817334}
 --- !u!114 &1336401562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2604,9 +2604,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba7908c5f3b1489facbcdfaa85b4985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eyes: {fileID: 4053434882359523}
-  _Weapon: {fileID: 1276817048}
-  _GameEvent: {fileID: 11400000, guid: 6fc58070df70f48a7b6f6d3ecffc65df, type: 2}
+  PlayerEventListener: {fileID: 11400000, guid: 6fc58070df70f48a7b6f6d3ecffc65df,
+    type: 2}
+  eyesTransform: {fileID: 4053434882359523}
+  weapon: {fileID: 1276817048}
 --- !u!114 &1997954227858197
 MonoBehaviour:
   m_ObjectHideFlags: 0

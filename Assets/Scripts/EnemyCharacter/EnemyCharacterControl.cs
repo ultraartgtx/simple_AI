@@ -6,40 +6,42 @@ using UnityEngine.AI;
 [RequireComponent (typeof (CharacterParameters))] 
 [RequireComponent(typeof(CharacterCalculateDamage))]
 [RequireComponent(typeof(AnimationEvent))]
+[RequireComponent(typeof(Animator))]
 public class EnemyCharacterControl : MonoBehaviour
 {
     //animation
-    public Animator _animator;
+    private Animator animator;
     private const string animationAttackName = "Attack1Trigger";
     
     //events
-    private AnimationEvent _AnimationEvent;
+    private AnimationEvent  AnimationEvent;
     
     //character parm scripts
-    private CharacterTakeDamege _characterTakeDamegeSctipt;
-    private CharacterParameters _enemyParms;
-    private CharacterCalculateDamage _characterCalculateDamage;
+    private CharacterTakeDamege  characterTakeDamegeSctipt;
+    private CharacterParameters  enemyParms;
+    private CharacterCalculateDamage  characterCalculateDamage;
     
     //parms
     private bool isGameOver = false;
-    private float attac=0;
-    private float attacRange = 0;
+    private float attack;
+    private float attackRange;
     
     //Navigation
-    private NavMeshAgent _agent;
-    private GameObject _player;
-    private Transform _target;
+    private NavMeshAgent  agent;
+    private GameObject  player;
+    private Transform  target;
+    private Transform enemyTransform;
   
    
     //Spawn
-    private SpawnEnemys _spawnEnemys;
+    private SpawnEnemys  spawnEnemys;
     
     
 
     public void GameOver()
     {
         isGameOver = true;
-        _agent.Stop();
+         agent.Stop();
     }
 
     private void OnDestroy()
@@ -49,44 +51,46 @@ public class EnemyCharacterControl : MonoBehaviour
 
     void death()
     {
-        _spawnEnemys.enemys.Remove(this.transform);
+         spawnEnemys.enemys.Remove(this.transform);
         Destroy(this.gameObject);
     }
 
     void GiveDamage()
     {
-        _player.GetComponent<CharacterTakeDamege>().TakeDamege(_characterCalculateDamage.calculateDamage(attac));
+         player.GetComponent<CharacterTakeDamege>().TakeDamege( characterCalculateDamage.calculateDamage(attack));
     }
 
     
     void setComponents()
     {
-        _characterCalculateDamage = GetComponent<CharacterCalculateDamage>();
-        _AnimationEvent = GetComponent<AnimationEvent>();
-        _enemyParms = GetComponent<CharacterParameters>();
-        _characterTakeDamegeSctipt = GetComponent<CharacterTakeDamege>();
-        _agent = GetComponent<NavMeshAgent>();
-        _spawnEnemys = FindObjectOfType<SpawnEnemys>();
-        _player=GameObject.FindGameObjectWithTag("Player");
+         characterCalculateDamage = GetComponent<CharacterCalculateDamage>();
+         AnimationEvent = GetComponent<AnimationEvent>();
+         animator = GetComponent<Animator>();
+         enemyParms = GetComponent<CharacterParameters>();
+         characterTakeDamegeSctipt = GetComponent<CharacterTakeDamege>();
+         agent = GetComponent<NavMeshAgent>();
+         spawnEnemys = FindObjectOfType<SpawnEnemys>();
+         player=GameObject.FindGameObjectWithTag("Player");
     }
 
     void registerReceivers()
     {
-        _AnimationEvent.OnHit += GiveDamage;
-        _characterTakeDamegeSctipt.OnCharacterDeath += death;
+         AnimationEvent.OnHit += GiveDamage;
+         characterTakeDamegeSctipt.OnCharacterDeath += death;
     }
     void unregisterReceivers()
     {
-        _AnimationEvent.OnHit -= GiveDamage;
-        _characterTakeDamegeSctipt.OnCharacterDeath -= death;
+         AnimationEvent.OnHit -= GiveDamage;
+         characterTakeDamegeSctipt.OnCharacterDeath -= death;
     }
 
     void setParms()
     {
-        _agent.speed = _enemyParms.speed;
-        _target = _player.transform;
-        attac = _enemyParms.attack;
-        attacRange = _enemyParms.attacRange;
+         agent.speed =  enemyParms.speed;
+         target =  player.transform;
+         attack =  enemyParms.attack;
+         attackRange =  1.7f;
+         enemyTransform = this.transform;
     }
     void Start()
     {
@@ -95,14 +99,16 @@ public class EnemyCharacterControl : MonoBehaviour
         setParms();
     }
 
-    
+
+
     void FixedUpdate()
     {
         if (!isGameOver)
         {
-            _agent.SetDestination(_target.position);
-            if (Vector3.Distance(_target.position , transform.position) <= attacRange) {
-                _animator.SetTrigger(animationAttackName);
+            
+            agent.SetDestination( target.position);
+            if (Vector3.Distance( target.position , enemyTransform.position) <= attackRange) {
+                animator.SetTrigger(animationAttackName);
             }
         }
     }

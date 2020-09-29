@@ -8,7 +8,7 @@ public class CharacterParameters : MonoBehaviour
     [HideInInspector] public float defence;
     [HideInInspector] public float attack;
     [HideInInspector] public float speed;
-    [HideInInspector] public float attacRange;
+    [HideInInspector] public float attackRange;
     [HideInInspector] public float retreatRadius;
     [HideInInspector] public float critChanse;
     [HideInInspector] public float critMultiplier;
@@ -28,7 +28,7 @@ public class CharacterParameters : MonoBehaviour
         critMultiplier = parmMultiplier(_CharacterParametersData._critMultiplier);
         
         speed = _CharacterParametersData.speed;
-        attacRange = _CharacterParametersData.attacRange;
+        attackRange = _CharacterParametersData.attacRange;
         retreatRadius = _CharacterParametersData.retreatRadius;
     }
     

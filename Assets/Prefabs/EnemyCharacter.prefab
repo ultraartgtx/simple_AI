@@ -1853,7 +1853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906d8ce45321849439740373d58c6c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 8203473410319558966}
+  isTest: 1
 --- !u!114 &8203473410326952326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1884,7 +1884,7 @@ MonoBehaviour:
   defence: 40
   attack: 10
   speed: 3.5
-  attacRange: 0
+  attackRange: 0
   retreatRadius: 0
   critChanse: 0
   critMultiplier: 0
