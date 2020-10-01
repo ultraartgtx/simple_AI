@@ -36,6 +36,8 @@
 
 8)добавить плавный поворот камеры
 
+9)реализовать MVC
+
 ##Использованные Ассеты:
 
 1)[Warrior Pack Bundle 1 FREE](https://assetstore.unity.com/packages/3d/animations/warrior-pack-bundle-1-free-36405)
